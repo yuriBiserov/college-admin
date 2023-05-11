@@ -39,7 +39,7 @@ function AddEditStudentsComponent(props) {
                     {props.student ? <h5 className='p-2 m-2'>Edit Student</h5>:<h5 className='p-2 m-2'>Add Student</h5>}
                     <form>
                         {errors.id && <span className='required'>ID is required</span>}
-                        <input className='form-control mb-3' placeholder='ID' disabled={props.student}  {...register("id", { required: true })} />
+                        <input className='form-control mb-3' placeholder='ID' disabled={props.student}  {...register("id", { required: true, maxLength: 9 , minLength:9 })} />
 
                         {errors.first_name && <span className='required'>First name is required</span>}
                         <input className='form-control mb-3' placeholder='First Name' {...register("first_name", { required: true })} />

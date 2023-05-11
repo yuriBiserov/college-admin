@@ -78,7 +78,7 @@ function AddEditLecturersComponent(props) {
             {props.lecturer ? <h5 className='p-2 m-2'>Edit Lecturer</h5>:<h5 className='p-2 m-2'>Add Lecturer</h5>}
             <form>
                 {errors.id && <span className='required'>ID is required</span>}
-                <input className='form-control mb-3 mx-auto' placeholder='ID' disabled={props.lecturer} {...register("id", { required: true })} />
+                <input className='form-control mb-3 mx-auto' placeholder='ID' disabled={props.lecturer} {...register("id", { required: true, maxLength: 9 , minLength:9 })} />
 
                 {errors.major && <span className='required'>Major is required</span>}
                 <MultiSelect options={options} value={selected} placeholder='Select Majors' onChange={setSelected} />
