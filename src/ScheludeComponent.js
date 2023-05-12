@@ -21,6 +21,7 @@ function ScheludeComponent() {
     const [currentMonth, setCurrentMonth] = useState((getMonth()))
     const { monthIndex } = useContext(GlobalContext)
     const { currentLessons } = useContext(GlobalContext)
+    const [lesson , setLesson] = useState({})
 
     useEffect(() => {
         if (!auth.CheckToken()) {
@@ -37,20 +38,26 @@ function ScheludeComponent() {
             setLessons(r.data)
         })
     }
+
+    const addLessonHandler = () => {
+        handleShow()
+    }
     
-    const addCourseHandler = () => {
+    const editLessonHandler = (lesson) => {
+        setLesson(lesson)
         handleShow()
     }
 
+    
     useEffect(() => {
         getLessons()
     }, [])
     return (
         <div className='w-100'>
             <h5 className='page-title m-3'>Schelude</h5>
-            <div onClick={() => addCourseHandler()} className='m-3 d-flex align-items-center submit-btn m-3'>
+            <div onClick={() => addLessonHandler()} className='m-3 d-flex align-items-center submit-btn m-3'>
                 {icons.add()}
-                <input type='button' className='bg-transparent border-0' value="Add Lesson" />
+                <input onClick={() => setLesson({})} type='button' className='bg-transparent border-0' value="Add Lesson" />
             </div>
             <div className='schelude'>
                 <CalendarHeaderComponent />
@@ -63,7 +70,13 @@ function ScheludeComponent() {
                                     currentLessons.map((c) => {
                                         return (
                                             <div className='single-lesson-info'>
-                                                <h6 className='bold'>{dayjs(c.date).format('DD/MM/YYYY')}</h6>
+                                                <div className='d-flex justify-content-between'>
+                                                    <h6 className='bold'>{dayjs(c.date).format('DD/MM/YYYY')}</h6>
+                                                    <div>
+                                                        <span onClick={() => editLessonHandler(c)} className='me-3 bt'>{icons.edit()}</span>
+                                                        <span className='bt-remove'>{icons.remove()}</span>
+                                                    </div>
+                                                </div>
                                                 <li className='bold'>{c.course.name}</li>
                                                 <li className='d-flex align-items-center'>{icons.location()} <span>{c.class}</span></li>
                                                 <li className='d-flex align-items-center'>{icons.clock()} <span>{c.start_time} - {c.end_time}</span></li>
@@ -79,7 +92,11 @@ function ScheludeComponent() {
             </div>
 
             <Modal size={'xl'} show={show} onHide={handleClose}>
-                <CreateLessonComponent handleClose={handleClose} getLessons={getLessons} setLessons={setLessons} />
+                <CreateLessonComponent
+                    handleClose={handleClose} 
+                    getLessons={getLessons} 
+                    setLessons={setLessons}
+                    lesson={lesson}/>
             </Modal>
             <ToastContainer />
         </div>

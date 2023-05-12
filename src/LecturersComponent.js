@@ -106,7 +106,7 @@ function LecturersComponent() {
                                     <td className='bt' onClick={e => editLecturer(s)}>
                                         {icons.edit()}
                                     </td>
-                                    <td className='bt' onClick={e => deleteLecturer(s.id)}>
+                                    <td className='bt-remove' onClick={e => deleteLecturer(s.id)}>
                                         {icons.remove()}
                                     </td>
                                 </tr>

@@ -311,6 +311,21 @@ form {
   }
 }
 
+.bt-remove:hover {
+  cursor: pointer;
+
+  svg {
+    transform: scale(1.5);
+    fill: #dc3545;
+  }
+
+  svg:hover {
+    cursor: pointer;
+    transform: scale(1.5);
+    fill: #dc3545;
+  }
+}
+
 .h-60vh {
   height: 60vh;
 }

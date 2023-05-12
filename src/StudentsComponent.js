@@ -100,7 +100,7 @@ function Students() {
                                     <td className='bt' onClick={e => editStudent(s)}>
                                         {icons.edit()}
                                     </td>
-                                    <td className='bt' onClick={e => deleteStudent(s.id)}>
+                                    <td className='bt-remove' onClick={e => deleteStudent(s.id)}>
                                         {icons.remove()}
                                     </td>
                                 </tr>
