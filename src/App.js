@@ -10,6 +10,7 @@ import LecturersComponent from './LecturersComponent';
 import SidebarComponent from './SidebarComponent';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AttendanceList from './AttendanceList';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/students" element={<><SidebarComponent/><StudentsComponent /></>}></Route>
             <Route path="/create-lesson" element={<><SidebarComponent/><CreateLessonComponent /></>}></Route>
             <Route path="/schelude" element={<><SidebarComponent/><ScheludeComponent /></>}></Route>
+            <Route path="/attendance-list" element={<><SidebarComponent/><AttendanceList /></>}></Route>
         </Routes>
       </div>
   );

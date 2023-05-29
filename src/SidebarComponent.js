@@ -16,8 +16,8 @@ function SidebarComponent() {
   const navigaveToLecturers = () => {
     navigate('/lecturers')
   }
-  const navigaveToLesson = () => {
-    navigate('/create-lesson')
+  const navigateToAttendanceList = () => {
+    navigate('/attendance-list')
   }
   const navigaveToSchelude = () => {
     navigate('/schelude')
@@ -36,6 +36,7 @@ function SidebarComponent() {
       <button className='sidebar-button' onClick={e => navigaveToStudents()}>Manage Students</button>
       <button className='sidebar-button' onClick={e => navigaveToSchelude()}>Manage Schelude</button>
       <button className='sidebar-button' onClick={e => navigaveToLecturers()}>Manage Lecturers</button>
+      <button className='sidebar-button' onClick={e => navigateToAttendanceList()}>Attendance List</button>
       <a onClick={handleLogout} className='d-flex m-4' href='/'>
         {icons.logout()}
       </a>
