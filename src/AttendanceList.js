@@ -48,7 +48,7 @@ function AttendanceList() {
             const selectedMajor = getValues('major')
             apiService.getCourses(selectedMajor).then(r => {
                 setCoursesByMajor(r.data)
-                setValue('course', "")
+                // setValue('course', "")
                 setCurrentLessons(lessons.filter(lesson => {
                     return lesson.major == selectedMajor
                 }))
@@ -65,16 +65,17 @@ function AttendanceList() {
         }
     }
     useEffect(() => {
-        if(getValues('course') && getValues('course').length){
+        if (getValues('course') && getValues('course').length) {
             const course = getValues('course')
             setCurrentLessons(lessons.filter(lesson => {
                 return lesson.course.name == course
             }))
-        }else{
+        } else {
             setCurrentLessons(lessons)
         }
 
     }, [watch('course')])
+
 
     const [page, setPage] = useState(1)
     const [itemsPerPage, setItemsPerPage] = useState(8)
@@ -116,29 +117,33 @@ function AttendanceList() {
                     </thead>
                     <tbody>
                         {currentLessons.map((lesson, idx) => {
-                            return <>
-                                <tr>
-                                    <td>{idx + 1}</td>
-                                    <td>
-                                        <div>
-                                            {dayjs(lesson.date).format('DD/MM/YYYY')}
-                                        </div>
-                                        <div>
-                                            {dayjs(lesson.date).format('HH:mm')}
-                                        </div>
-                                    </td>
-                                    <td>{lesson.course.name}</td>
-                                    <td>{lesson.lecturer.first_name} {lesson.lecturer.last_name}</td>
-                                    <td>
-                                        {students.map((student) => {
-                                            return <div className='student d-flex justify-content-between'>
-                                                <span>{student.first_name} {student.last_name}</span>
-                                                <span>{checkStudentAttendancy(student.id, lesson) ? icons.check() : icons.notChecked()}</span>
-                                            </div>
-                                        })}
-                                    </td>
-                                </tr>
-                            </>
+                            {
+                                return dayjs(lesson.date).isBefore(dayjs()) &&
+                                    <>
+                                        <tr>
+                                            <td>{idx + 1}</td>
+                                            <td>
+                                                <div>
+                                                    {dayjs(lesson.date).format('DD/MM/YYYY')}
+                                                </div>
+                                                <div>
+                                                    {lesson.start_time}
+                                                </div>
+                                            </td>
+                                            <td>{lesson.course.name}</td>
+                                            <td>{lesson.lecturer.first_name} {lesson.lecturer.last_name}</td>
+                                            <td>
+                                                {students.map((student) => {
+                                                    return <div className='student d-flex justify-content-between'>
+                                                        <span>{student.first_name} {student.last_name}</span>
+                                                        <span>{checkStudentAttendancy(student.id, lesson) ? icons.check() : icons.notChecked()}</span>
+                                                    </div>
+                                                })}
+                                            </td>
+                                        </tr>
+                                    </>
+                            }
+
                         })}
                     </tbody>
                 </Table>
