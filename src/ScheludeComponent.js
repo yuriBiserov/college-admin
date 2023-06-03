@@ -69,7 +69,7 @@ function ScheludeComponent() {
                                 {
                                     currentLessons.map((c) => {
                                         return (
-                                            <div className='single-lesson-info'>
+                                            <div key={c._id} className='single-lesson-info'>
                                                 <div className='d-flex justify-content-between'>
                                                     <h6 className='bold'>{dayjs(c.date).format('DD/MM/YYYY')}</h6>
                                                     <div>

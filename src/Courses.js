@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState, useEffect, Fragment } from 'react'
 import { Table, Form, Button, Row, Col } from 'react-bootstrap';
 import AddEditCourseComponent from './AddEditCourseComponent';
 import apiService from './services/api.service';
@@ -94,7 +94,7 @@ function Courses() {
                 </thead>
                 <tbody>
                   {currentItems.map((c, idx) => {
-                    return <>
+                    return <Fragment key={c._id}>
                       <tr>
                         <td>{idx + 1}</td>
                         <td>{c.number}</td>
@@ -108,7 +108,7 @@ function Courses() {
                           {icons.remove()}
                         </td>
                       </tr>
-                    </>
+                    </Fragment>
                   })}
                 </tbody>
               </Table>

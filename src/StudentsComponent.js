@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { React, useState, useEffect } from 'react'
+import { React, useState, useEffect, Fragment } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Table, Button } from 'react-bootstrap';
 import apiService from './services/api.service';
@@ -91,7 +91,7 @@ function Students() {
                     </thead>
                     <tbody>
                         {currentItems.map((s, idx) => {
-                            return <>
+                            return <Fragment key={s._id}>
                                 <tr>
                                     <td>{idx + 1}</td>
                                     <td>{s.id}</td>
@@ -104,7 +104,7 @@ function Students() {
                                         {icons.remove()}
                                     </td>
                                 </tr>
-                            </>
+                            </Fragment>
                         })}
                     </tbody>
                 </Table>

@@ -5,6 +5,11 @@ import GlobalContext from './context/GlobalContext';
 function DayComponent({ day, rowIdx, lessons }) {
     const { currentLessons, setCurrentLessons } = useContext(GlobalContext)
 
+    //today's lessons on page load 
+    useEffect(() => {
+        setCurrentLessons(lessons.filter((l) => dayjs(l.date).format("DD-MM-YY") == dayjs().format("DD-MM-YY")))
+    },[lessons])
+
     const getDaysClasses = () => {
         let className = ""
         const currentDay = day.format("DD-MM-YY")

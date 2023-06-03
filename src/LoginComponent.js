@@ -26,7 +26,7 @@ function LoginComponent() {
                 <ToastContainer />
                 <h2 className='d-flex justify-content-center p-4'>Login</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    {errors.id && <span className='required d-flex justify-content-center'>ID is required</span>}
+                    {errors.id && <span className='required d-flex justify-content-center'>ID must be at least 9 digits</span>}
                     <input type='text' className='form-control mb-3 mx-auto' placeholder='ID' {...register("id", { required: true, maxLength: 9 , minLength:9 })} />
                     {errors.password && <span className='required d-flex justify-content-center'>Password is required</span>}
                     <input type='password' className='form-control mb-3 mx-auto' placeholder='Password' {...register("password", { required: true })} />

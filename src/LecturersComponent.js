@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { React, useState, useEffect } from 'react'
+import { React, useState, useEffect, Fragment } from 'react'
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Table, Form, Button, Row, Col, FormControl, FormSelect, FormLabel } from 'react-bootstrap';
@@ -95,7 +95,7 @@ function LecturersComponent() {
                     </thead>
                     <tbody>
                         {currentItems.map((s, idx) => {
-                            return <>
+                            return <Fragment key={s._id}>
                                 <tr>
                                     <td>{idx + 1}</td>
                                     <td>{s.id}</td>
@@ -110,7 +110,7 @@ function LecturersComponent() {
                                         {icons.remove()}
                                     </td>
                                 </tr>
-                            </>
+                            </Fragment>
                         })}
                     </tbody>
                 </Table>

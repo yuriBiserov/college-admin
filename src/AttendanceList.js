@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import apiService from './services/api.service'
 import { ToastContainer } from 'react-toastify'
 import { Pagination } from 'antd';
@@ -23,9 +23,9 @@ function AttendanceList() {
     const [currentLessons, setCurrentLessons] = useState([])
 
     useEffect(() => {
-        apiService.getStudents().then((response) => {
-            setStudents(response.data)
-        })
+        // apiService.getStudents().then((response) => {
+        //     setStudents(response.data)
+        // })
 
         apiService.getLessons().then((response) => {
             setLessons(response.data.sort((a, b) => new Date(a.date) - new Date(b.date)))
@@ -90,7 +90,7 @@ function AttendanceList() {
                         { required: true })}>
                     <option value="">Select Major</option>
                     {majors.map(m => {
-                        return <option value={m}>{m}</option>
+                        return <option key={m} value={m}>{m}</option>
                     })}
                 </Form.Select>
                 <Form.Select disabled={!getValues('major')} id='course' className='form-control mb-3 w-auto'
@@ -99,7 +99,7 @@ function AttendanceList() {
                 >
                     <option value="">Select Course</option>
                     {coursesByMajor.map(course => {
-                        return <option value={course.name}>{course.name}</option>
+                        return <option key={course.number} value={course.name}>{course.name}</option>
                     })}
                 </Form.Select>
             </div>
@@ -119,7 +119,7 @@ function AttendanceList() {
                         {currentLessons.map((lesson, idx) => {
                             {
                                 return dayjs(lesson.date).isBefore(dayjs()) &&
-                                    <>
+                                    <Fragment key={lesson._id}>
                                         <tr>
                                             <td>{idx + 1}</td>
                                             <td>
@@ -133,15 +133,15 @@ function AttendanceList() {
                                             <td>{lesson.course.name}</td>
                                             <td>{lesson.lecturer.first_name} {lesson.lecturer.last_name}</td>
                                             <td>
-                                                {students.map((student) => {
-                                                    return <div className='student d-flex justify-content-between'>
+                                                {lesson.students.map((student) => {
+                                                    return <div key={student._id} className='student d-flex justify-content-between'>
                                                         <span>{student.first_name} {student.last_name}</span>
                                                         <span>{checkStudentAttendancy(student.id, lesson) ? icons.check() : icons.notChecked()}</span>
                                                     </div>
                                                 })}
                                             </td>
                                         </tr>
-                                    </>
+                                    </Fragment>
                             }
 
                         })}
