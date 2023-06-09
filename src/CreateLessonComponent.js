@@ -105,8 +105,12 @@ function CreateLessonComponent(props) {
       })
     ]).then((r) => {
       toastSuccess("Lessons Added Successfully")
-      props.getLessons()
+      
+      setTimeout(() => {
+        props.getLessons()
+      }, 500)
       props.handleClose()
+      // window.location.reload()
     }, err => { toastFailed("Adding Lessons Failed...") })
   }
 

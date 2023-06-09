@@ -6,8 +6,11 @@ export const AuthHeader = () => {
     }
 }
 const CheckToken = () => {
-    return sessionStorage.getItem("token")
-    
+    if(sessionStorage.getItem("token")){
+        return true
+    }else{
+        return false
+    }
 }
 export default {
     AuthHeader,
